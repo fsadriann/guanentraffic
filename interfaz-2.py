@@ -15,16 +15,13 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
-        # load images
+        # logo
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
         self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo_g.png")), size=(52, 52))
 
         #qr
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
         self.qr_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "qr.png")), size=(100, 100))
-
-        self.navigation_frame_label = customtkinter.CTkLabel(self.navigation_frame, text="", image=self.qr_image, compound="left", font=customtkinter.CTkFont(size=20, weight="bold"))
-        self.navigation_frame_label.grid(row=0, column=3, padx=20, pady=20)
 
         #Icono de la ventana
 
@@ -51,22 +48,21 @@ class App(customtkinter.CTk):
         self.appearance_mode_menu.grid(row=6, column=0, padx=20, pady=20, sticky="s")
 
         # create home frame
-        self.home_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
-        self.home_frame.grid_columnconfigure(0, weight=1)
-
-        self.home_frame_large_image_label = customtkinter.CTkLabel(self.home_frame, text="")
-        self.home_frame_large_image_label.grid(row=0, column=0, padx=20, pady=10)
+        self.home_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent",bg_color="transparent")
+        self.home_frame.grid_columnconfigure(12, weight=1)
 
         #"canvas"(en realidad ahi a a estar el video)
 
-        self.videocapture = customtkinter.CTkCanvas(self.home_frame, bg="black")
-        self.videocapture.grid(row=6, column=0, padx=20, pady=10)
+        self.videocapture = customtkinter.CTkCanvas(self.home_frame, bg="black", width=800, height=400)
+        self.videocapture.grid(padx=20, pady=20)
 
+        # qr
 
-    
+        self.home_frame_large_image_label= customtkinter.CTkLabel(self.home_frame, text="", image=self.qr_image, compound="center", font=customtkinter.CTkFont(size=100, weight="bold"))
+        self.home_frame_large_image_label.grid(padx=10, pady=10)    
 
         # create second frame
-        self.second_frame = customtkinter.CTkFrame(self, corner_radius=30, fg_color="transparent")
+        self.second_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
 
         # create third frame
         self.third_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
