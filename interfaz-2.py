@@ -1,5 +1,5 @@
 import customtkinter
-import customtkinter as ctk
+from customtkinter import *
 import os
 from PIL import Image
 
@@ -15,11 +15,20 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
-        # load images with light and dark mode image
+        # load images
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
         self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo_g.png")), size=(52, 52))
 
-        self.qr_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "qr.png")), size=(52, 52))
+        #qr
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
+        self.qr_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "qr.png")), size=(100, 100))
+
+        self.navigation_frame_label = customtkinter.CTkLabel(self.navigation_frame, text="", image=self.qr_image, compound="left", font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.navigation_frame_label.grid(row=0, column=3, padx=20, pady=20)
+
+        #Icono de la ventana
+
+
 
         # create navigation frame
         self.navigation_frame = customtkinter.CTkFrame(self, corner_radius=0)
@@ -53,7 +62,7 @@ class App(customtkinter.CTk):
         self.videocapture = customtkinter.CTkCanvas(self.home_frame, bg="black")
         self.videocapture.grid(row=6, column=0, padx=20, pady=10)
 
-        # imagen qr
+
     
 
         # create second frame
