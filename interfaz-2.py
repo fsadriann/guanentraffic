@@ -2,6 +2,7 @@ import customtkinter
 from customtkinter import *
 import os
 from PIL import Image
+import tkinter as tk
 
 
 class App(customtkinter.CTk):
@@ -10,6 +11,8 @@ class App(customtkinter.CTk):
 
         self.title("GUANENTRAFFIC 0.1")
         self.geometry("1280x720")
+        self.bind("<F11>", lambda event: self.attributes("-fullscreen", not self.attributes("-fullscreen")))
+        self.bind("<Escape>",lambda event: self.attributes("-fullscreen", False))
 
         # set grid layout 1x2
         self.grid_rowconfigure(0, weight=1)
@@ -17,7 +20,7 @@ class App(customtkinter.CTk):
 
         # logo
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
-        self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo_g.png")), size=(52, 52))
+        self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo_g.png")), size=(72, 72))
 
         #qr
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
@@ -58,29 +61,47 @@ class App(customtkinter.CTk):
 
         self.appearance_mode_menu = customtkinter.CTkOptionMenu(self.navigation_frame, values=["Light", "Dark", "System"], command=self.change_appearance_mode_event)
         self.appearance_mode_menu.grid(row=6, column=0, padx=20, pady=20, sticky="s")
+        self.appearance_mode_menu.configure(font=('Arial Rounded MT Bold',10))
 
         # home frame --------------------------------------------------------------------------------
         self.home_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
+        self.home_frame.place(relx=0.5, rely=0.5, anchor=customtkinter.CENTER)
+
 
         # canvas frame
 
-        self.videocapture_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=0, fg_color='white', width=900, height=500)
+        self.videocapture_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=15, fg_color='gray44', width=900, height=500)
         self.videocapture_frame.place(relx=0.5, rely=0.3, anchor=customtkinter.CENTER)
 
         # canvas(en realidad ahi a a estar el video)
 
-        self.videocapture = customtkinter.CTkCanvas(self.videocapture_frame, bg="black", width=800, height=400)
-        self.videocapture.grid(padx=20, pady=20)
+        self.videocapture = customtkinter.CTkCanvas(self.videocapture_frame,bg="black", width=800, height=400)
+        self.videocapture.grid(padx=10, pady=10)
 
         #qr frame
 
-        self.qr_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=0, fg_color='white', width=20, height=20)
+        self.qr_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=0, fg_color='transparent', width=5, height=5)
         self.qr_frame.place(relx=0.9, rely=0.9, anchor=customtkinter.CENTER)
 
         # qr
 
         self.qr_label= customtkinter.CTkLabel(self.qr_frame, text="", image=self.qr_image, compound="center", font=customtkinter.CTkFont(size=100, weight="bold"))
-        self.qr_label.grid(padx=10, pady=10)    
+        self.qr_label.grid(padx=10, pady=10)
+
+        # frame pestañas
+        self.tabs_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=15, width=800, height=150)
+        self.tabs_frame.grid(padx=10, pady=10, sticky="nsew")
+        self.tabs_frame.place(relx=0.5,rely=0.7, anchor=customtkinter.CENTER)
+
+        tabview = customtkinter.CTkTabview(self.tabs_frame, width=780, height=130)
+        tabview.grid(padx=10, pady=10)
+
+        tabview.add("cámara 1")  # add tab at the end
+        tabview.add("cámara 2")  # add tab at the end
+        tabview.set("cámara 1")  # set currently visible tab
+
+
+
 
         # create second frame --------------------------------------------------------------------------------------------
         self.second_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
