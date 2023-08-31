@@ -70,12 +70,12 @@ class App(customtkinter.CTk):
 
         # canvas frame
 
-        self.videocapture_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=15, fg_color='gray44', width=900, height=500)
+        self.videocapture_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=15, fg_color='gray44', width=900, height=400)
         self.videocapture_frame.place(relx=0.5, rely=0.3, anchor=customtkinter.CENTER)
 
         # canvas(en realidad ahi a a estar el video)
 
-        self.videocapture = customtkinter.CTkCanvas(self.videocapture_frame,bg="black", width=800, height=400)
+        self.videocapture = customtkinter.CTkCanvas(self.videocapture_frame,bg="black", width=800, height=300)
         self.videocapture.grid(padx=10, pady=10)
 
         #qr frame
@@ -88,20 +88,16 @@ class App(customtkinter.CTk):
         self.qr_label= customtkinter.CTkLabel(self.qr_frame, text="", image=self.qr_image, compound="center", font=customtkinter.CTkFont(size=100, weight="bold"))
         self.qr_label.grid(padx=10, pady=10)
 
-        # frame pestañas
-        self.tabs_frame = customtkinter.CTkFrame(self.home_frame, corner_radius=15, width=800, height=150)
-        self.tabs_frame.grid(padx=10, pady=10, sticky="nsew")
-        self.tabs_frame.place(relx=0.5,rely=0.7, anchor=customtkinter.CENTER)
+        # segmented button frame--------------------
 
-        tabview = customtkinter.CTkTabview(self.tabs_frame, width=780, height=130)
-        tabview.grid(padx=10, pady=10)
+        def segmented_button_callback(value):
+            print("segmented button clicked:", value)
 
-        tabview.add("cámara 1")  # add tab at the end
-        tabview.add("cámara 2")  # add tab at the end
-        tabview.set("cámara 1")  # set currently visible tab
-
-
-
+        self.button_frame = CTkFrame(self.home_frame, corner_radius=15, fg_color='white', width=100, height=100)
+        self.button_frame.place(relx=0.5, rely=0.6)
+        
+        self.segmented_button = CTkSegmentedButton(self.button_frame, values=["Value 1", "Value 2", "Value 3"], command=segmented_button_callback)
+        self.segemented_button.set("Value 1")
 
         # create second frame --------------------------------------------------------------------------------------------
         self.second_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
