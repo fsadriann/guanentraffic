@@ -88,16 +88,7 @@ class App(customtkinter.CTk):
         self.qr_label= customtkinter.CTkLabel(self.qr_frame, text="", image=self.qr_image, compound="center", font=customtkinter.CTkFont(size=100, weight="bold"))
         self.qr_label.grid(padx=10, pady=10)
 
-        # segmented button frame--------------------
 
-        def segmented_button_callback(value):
-            print("segmented button clicked:", value)
-
-        self.button_frame = CTkFrame(self.home_frame, corner_radius=15, fg_color='white', width=100, height=100)
-        self.button_frame.place(relx=0.5, rely=0.6)
-        
-        self.segmented_button = CTkSegmentedButton(self.button_frame, values=["Value 1", "Value 2", "Value 3"], command=segmented_button_callback)
-        self.segemented_button.set("Value 1")
 
         # create second frame --------------------------------------------------------------------------------------------
         self.second_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
