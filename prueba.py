@@ -68,25 +68,28 @@ def finalizar_limpiar():
     cap.release()
 
 cap = None
-root = Tk()
-root.config(background="blue")
+window = Tk()
+window.config(background="blue")
 
-lblInfo1 = Label(root, text="Guanentraffic", font="bold")
-lblInfo1.grid(column=0, row=0, columnspan=2)
+frameInicio = Frame(window)
+frameInicio.place(x=10, y=10)
+
+lblTitulo = Label(frameInicio, text="Guanentraffic", font="bold")
+lblTitulo.place()
 
 selected = IntVar()
-rad1 = Radiobutton(root, text="Elegir video", width=20, value=1, variable=selected, command=video_de_entrada)
-rad2 = Radiobutton(root, text="Video en directo", width=20, value=2, variable=selected, command=video_de_entrada)
+rad1 = Radiobutton(window, text="Elegir video", width=20, value=1, variable=selected, command=video_de_entrada)
+rad2 = Radiobutton(window, text="Video en directo", width=20, value=2, variable=selected, command=video_de_entrada)
 rad1.grid(column=0, row=1)
 rad2.grid(column=1, row=1)
 
-lblInfoVideoPath = Label(root, text="", width=20)
+lblInfoVideoPath = Label(window, text="", width=20)
 lblInfoVideoPath.grid(column=0, row=2)
 
-lblVideo = Label(root)
+lblVideo = Label(window)
 lblVideo.grid(column=0, row=3, columnspan=2)
 
-btnEnd = Button(root, text="Finalizar visualización y limpiar", state="disabled", command=finalizar_limpiar)
+btnEnd = Button(window, text="Finalizar visualización y limpiar", state="disabled", command=finalizar_limpiar)
 btnEnd.grid(column=0, row=4, columnspan=2, pady=10)
 
-root.mainloop()
+window.mainloop()
